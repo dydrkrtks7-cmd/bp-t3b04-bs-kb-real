@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hwagok-hyperpublic-note.shirts-mapo-class.xyz/sitemap.xml
-Sitemap: https://hwagok-hyperpublic-note.shirts-mapo-class.xyz/sitemap-pages.xml
+Sitemap: https://balsan-song-trend.program-school.online/sitemap.xml
+Sitemap: https://balsan-song-trend.program-school.online/sitemap-pages.xml
