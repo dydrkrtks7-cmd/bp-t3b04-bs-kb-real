@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글 목록 (2/2) · t3b04-bs-kb-real</title>
+  <meta name="description" content="t3b04-bs-kb-real에 올라온 글 목록입니다.">
+  <link rel="canonical" href="https://balsan-song-trend.program-school.online/posts-2.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+        :root {
+            --bg-color: #0b0d17;
+            --main-gradient: linear-gradient(180deg, #0b0d17 0%, #151829 100%);
+            --card-surface: rgba(255, 255, 255, 0.02);
+            --border-color: rgba(255, 255, 255, 0.05);
+            --text-high: #e2e8f0;
+            --text-low: #94a3b8;
+            --copper: #d97706;
+            --glow: rgba(217, 119, 6, 0.12);
+            --font-serif: 'Gowun Batang', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--main-gradient);
+            color: var(--text-high);
+            font-family: var(--font-serif);
+            line-height: 1.85;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 90px 24px;
+            width: 100%;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .blog-header::after {
+            content: '';
+            display: block;
+            width: 35px;
+            height: 1px;
+            background: var(--copper);
+            margin: 20px auto 0;
+            opacity: 0.4;
+            box-shadow: 0 0 6px var(--copper);
+        }
+
+        .blog-sub {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--copper);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+
+        .blog-date {
+            font-size: 0.85rem;
+            color: var(--text-low);
+            margin-top: 10px;
+            font-family: var(--font-sans);
+        }
+
+        .essay-content {
+            font-size: 1.08rem;
+            color: var(--text-high);
+            text-align: justify;
+        }
+
+        .essay-p {
+            margin-bottom: 28px;
+            text-indent: 10px;
+        }
+
+        .highlight-quote {
+            background: var(--card-surface);
+            border-left: 2px solid var(--copper);
+            padding: 20px 24px;
+            margin: 36px 0;
+            border-radius: 0 8px 8px 0;
+            backdrop-filter: blur(8px);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .quote-inner {
+            font-style: italic;
+            color: #f8fafc;
+            font-size: 1.02rem;
+        }
+
+        .comments {
+            margin-top: 75px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+        }
+
+        .comments-label {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--copper);
+            letter-spacing: 0.12em;
+            margin-bottom: 22px;
+            text-transform: uppercase;
+        }
+
+        .comment-node {
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .comment-node:hover {
+            border-color: rgba(217, 119, 6, 0.22);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+        }
+
+        .author-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .post-time {
+            color: var(--text-low);
+        }
+
+        .stars {
+            color: var(--copper);
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+
+        .text-body {
+            font-size: 0.92rem;
+            color: var(--text-high);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 35px 24px;
+            border-top: 1px solid var(--border-color);
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--text-low);
+            letter-spacing: 0.05em;
+        }
+
+        .soft-glow {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .blog-title {
+                font-size: 1.55rem;
+            }
+
+            .essay-content {
+                font-size: 1.02rem;
+            }
+        }
+    </style>
+  <meta property="og:title" content="글 목록 (2/2) · t3b04-bs-kb-real">
+  <meta property="og:description" content="t3b04-bs-kb-real에 올라온 글 목록입니다.">
+  <meta property="og:url" content="https://balsan-song-trend.program-school.online/posts-2.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <div class="container">
+    <header class="blog-header">
+            <div class="soft-glow"></div>
+            <div class="blog-sub">DAILY REFLECTION</div>
+            <div class="blog-title">오피스 빌딩 사이로 흩어지는 멜로디의 파편</div>
+            <div class="blog-date">2026. 05. 27</div>
+        </header>
+    <main>
+      <h1>글 목록</h1>
+      <p>전체 39개 · 2/2 페이지</p>
+      <ul class="post-list">
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0192.html">발산 노래방 내돈내산 탐색으로 확인하는 합정 셔츠룸 핫플</a>
+        <p class="post-item__summary">최근 발산 노래방 내돈내산 리뷰를 중심으로 다양한 유흥 정보가 공유되고 있으며, 그 관심은 인근 합정 지역으로까지 넓어지고 있습니다. 특히 셔츠룸과 같은 특수한 형태의 장소를 방문할 때는 무작정 검</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0166.html">발산 노래방 내돈내산 경험으로 비교하는 합정 노래방 추천정보</a>
+        <p class="post-item__summary">발산 노래방 내돈내산 경험을 기반으로 살펴보면 노래방을 선택할 때 가격과 서비스의 질 사이에서 고민하게 됩니다. 보통 합리적인 정액제를 선호하는 그룹과 서비스가 강조된 프리미엄 옵션을 선호하는 그룹</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0167.html">발산 노래방 내돈내산 후기로 분석한 연남 클럽 추천정보</a>
+        <p class="post-item__summary">발산 노래방 내돈내산 경험을 해본 사람들은 연남 지역의 클럽을 방문할 때도 비슷한 주의를 기울여야 합니다. 많은 이들이 실패하는 지점은 장소의 특성을 충분히 파악하지 않고 방문하는 것입니다. 특히 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0168.html">발산 노래방 내돈내산 경험으로 본 합정 셔츠룸 추천정보 가이드</a>
+        <p class="post-item__summary">흔히 발산 노래방 내돈내산 후기를 찾아보는 분들이라면 합정 인근의 유흥 문화를 경험하고자 하는 경우가 많습니다. 합정 지역은 접근성이 뛰어나지만 매장마다 서비스의 결이 다르기 때문에 신중한 선택이 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0169.html">발산 노래방 내돈내산 이후 공덕 가라오케 추천정보 활용법</a>
+        <p class="post-item__summary">친한 동료들과 퇴근 후 즐거운 시간을 보내기 위해 공덕 지역을 찾았다가 낭패를 보는 경우가 종종 있습니다. 발산 노래방 내돈내산 사례처럼 검증되지 않은 곳을 무작정 방문했다가는 원치 않는 비용이나 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0170.html">발산 노래방 내돈내산 오해와 상수 마사지 추천정보 제대로 알기</a>
+        <p class="post-item__summary">흔히 마사지샵은 아무 때나 방문해도 동일한 서비스를 받을 수 있을 것이라 생각하기 쉽습니다. 하지만 발산 노래방 내돈내산 경험담에서 보듯, 업종마다 서비스가 최상으로 유지되는 특정 시간대가 존재합니</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0171.html">발산 노래방 내돈내산 경험으로 본 망원 노래방 추천정보</a>
+        <p class="post-item__summary">발산 노래방 내돈내산 경험을 돌이켜보면 좋은 공간을 선택할 때 충족해야 할 여러 조건이 있습니다. 단순히 시설이 깨끗한 것을 넘어 방음의 정도나 음향 기기의 상태가 이용 만족도를 크게 좌우하기 때문</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0172.html">발산 노래방 내돈내산 후기로 분석한 홍대 노래방 추천정보</a>
+        <p class="post-item__summary">혹시 여러분은 즐거운 시간을 보내기 위해 노래방을 찾을 때 어떤 기준을 가지고 계신가요? 발산 노래방 내돈내산 경험을 통해 얻은 노하우를 바탕으로, 홍대 인근에서 후회 없는 선택을 하기 위한 방법을</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0173.html">발산 노래방 내돈내산 노하우로 확인하는 공덕 셔츠룸 추천정보</a>
+        <p class="post-item__summary">발산 노래방 내돈내산 경험을 응용하여 공덕 지역의 셔츠룸을 현명하게 이용하는 절차를 설명해 드립니다. 첫 번째 단계는 해당 업체의 운영 방식을 온라인상에서 먼저 탐색하는 것입니다. 무작정 방문하기보</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0174.html">발산 노래방 내돈내산 경험으로 비교하는 연남 유흥 추천정보</a>
+        <p class="post-item__summary">발산 노래방 내돈내산 경험을 바탕으로 즐거운 저녁 시간을 보낼 장소를 물색할 때가 있습니다. 흔히 우리는 합리적인 소비를 위해 여러 업소의 가격 체계를 비교 분석하곤 합니다. 오늘은 이러한 관점에서</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0175.html">발산 노래방 내돈내산 후기가 알려주는 마곡 가라오케 추천정보</a>
+        <p class="post-item__summary">발산 노래방 내돈내산 경험을 하다 보면 종종 예상치 못한 불편함을 겪곤 합니다. 특히 예약 단계에서 충분한 설명이 이루어지지 않아 현장에서 혼선을 빚는 경우가 발생하곤 합니다. 이러한 실수를 줄이기</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0176.html">발산 노래방 내돈내산으로 살펴본 마곡 유흥 추천정보 체크</a>
+        <p class="post-item__summary">발산 노래방 내돈내산 활동을 즐기시는 분들께 유용한 체크리스트를 제안해 드립니다. 많은 분이 장소를 선택할 때 위치와 접근성을 최우선으로 고려하는 경향이 있습니다. 특히 대중교통 이용이 편리한지, </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/juice-1.html">발산 노래방 내돈내산 가이드</a>
+        <p class="post-item__summary">발산 지역에서는 다양한 노래방 업所이 운영되고 있습니다. 이 페이지에서는 발산 노래방 내돈내산에 대한 객관적인 정보를 안내합니다. 내돈내산이라 함은 직접 비용을 지불하고 방문한 경험을 바탕으로 한 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/juice-2.html">발산 노래방 내돈내산 가이드</a>
+        <p class="post-item__summary">발산 지역은 다양한 노래방 업체가 밀집한 곳으로, 개인 또는 소규모 모임에 적합한 공간을 쉽게 찾을 수 있습니다. 노래방을 이용할 때는 내 돈으로 직접 비용을 지불하는 방식인 내돈내산 문화가 일반적</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-1.html">발산 노래방 내돈내산 가이드 및 관련 정보</a>
+        <p class="post-item__summary">발산 지역에서 실내 취미 활동이나 소규모 모임 장소로 노래방을 찾는 경우, 실제 방문 전 충분한 사전 정보가 필요합니다. 많은 이용객들은 시설 상태, 음향 장비의 품질, 그리고 주변의 편의 시설 접</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-2.html">발산 노래방 내돈내산</a>
+        <p class="post-item__summary">발산 지역에서 노래방을 방문하려는 경우 사전에 알아두면 도움이 되는 정보들이 있습니다. 노래방은 다양한 가격대를 운영하고 있으며, 이용 전에 예약 여부를 확인하는 것이 중요합니다. 특히 피크타임에는</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-3.html">발산 노래방 내돈내산 안내</a>
+        <p class="post-item__summary">발산 지역의 노래방을 직접 방문하여 정보를 수집하고 정리하는 과정은 소비자에게 실질적인 도움을 주는 주요 활동입니다. 내돈내산은 자신의 자금을 사용하여 실제 이용 경험을 공유하는 형태로, 다양한 업</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/review-001-1t4e79v.html">발산 노래방 음향 세팅 최적화하는 법</a>
+        <p class="post-item__summary">발산 일대 노래방을 다니다 보면 번지르르한 겉모습만 보고 덜컥 들어갔다가 낭패를 보는 경우가 많다. 요즘 것들은 온통 화려한 조명과 터치스크린에만 눈이 돌아가는데 정작 중요한 소리의 결은 다 망쳐놓</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/review-001.html">형님도 헷갈렸던 테라포밍 마스의 비너스 확장, 2인전용 최강 전략 분석</a>
+        <p class="post-item__summary">형님들, 오늘은 테라포밍 마스의 비너스 확장에 대해 깊이 있게 알아보겠습니다. 이 확장은 게임을 더 흥미롭게 만들면서도, 특정 2인 전략에서 게임 밸런스를 완전히 무너뜨릴 수 있습니다.</p>
+      </li>
+      </ul>
+    <nav class="pager">
+      <a class="pager__link" href="posts.html">1</a>
+      <span class="pager__current">2</span>
+    </nav>
+    </main>
+  </div>
+</body>
+</html>
